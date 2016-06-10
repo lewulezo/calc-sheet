@@ -1,0 +1,26 @@
+{
+  "name": "calc-sheet",
+  "version": "0.0.1",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "keywords": [
+    "calc-sheet"
+  ],
+  "authors": [
+    "lewulezo"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "react": "^15.0.1"
+  }
+}

@@ -1,0 +1,94 @@
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <style>
+      .template {
+        display:none;
+      }
+      .result {
+        visibility: hidden;
+      }
+      .result.show{
+        visibility: normal;
+      }
+      td {
+        white-space: nowrap;
+      }
+    </style>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="js/expression.js"></script>
+    <script src="js/calc-sheet.js"></script>
+  </head>
+  <body>
+    <label>题目数量</label>
+    <input type="number" id="itemCount" value="3" style="width:50px" max="100" min="1">
+    <!--
+    <select id="itemCount">
+      <option>2</option>
+      <option selected="selected">3</option>
+      <option>10</option>
+      <option>20</option>
+      <option>50</option>
+      <option>100</option>
+    </select>
+    -->
+    <label>复杂度</label>
+    <select id="complex">
+      <option value="0">两个数</option>
+      <option value="1">三个数</option>
+      <option value="2" selected="selected">四个数</option>
+    </select> 
+    <label>加减法小数位数</label>
+    <select id="addBit">
+      <option>0</option>
+      <option>1</option>
+      <option selected="selected">2</option>
+      <option>3</option>
+    </select>
+    <label>乘法小数位数</label>
+    <select id="mulBit">
+      <option>0</option>
+      <option selected="selected">1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
+    <label>最大数</label>
+    <input id="maxNum" style="width:60px" value="100" type="number">
+    <label>最小数</label>
+    <input id="minNum" ype="number" style="width:60px" value="0">
+    <input id="multipleFlag" checked="checked" type="checkbox">
+    <label>包含乘法</label>
+    <label>限制时间</label>
+    <select id="timeLimit">
+      <option value="0">不限制时间</option>
+      <option value="2">每题2分钟</option>
+      <option value="5" selected>每题5分钟</option>
+    </select>
+    <button onclick="start()">开始出题</button>
+    <hr>
+    <table>
+      <tbody id="items">
+      </tbody>
+    </table>
+    <hr>
+    <span id="startTime"></span>&nbsp;
+    <span id="endTime"></span>&nbsp;
+    <span id="passTime"></span>
+    <hr> 
+    <button id="toggleResult" onclick="toggleResult()" disabled="true">显示答案</button>
+    <button id="validate" onclick="validate()">检查结果</button>
+    <span id="score"></span>
+    <span id="time"></span>
+    <table class="template">
+      <tbody class="template">
+      <tr class="template">
+        <td class="itemId"></td><td>
+        </td><td class="expression"></td>
+        <td class="equal"> = </td>
+        <td class="answer"><input type="text"></td>
+        <td class="correct"></td>
+        <td class="result"></td>
+      </tr>
+      </tbody>
+    </table>
+  
+</body></html>
