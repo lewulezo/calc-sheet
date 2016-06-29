@@ -2,9 +2,9 @@
 
 var NodeMailer = require('nodemailer');
 
-const MAIL_SERVER_URL = 'smtp://lewulezo%40163.com:Naduynil.163@smtp.163.com';
+const MAIL_SERVER_URL = 'smtp://lewulezo_send%40163.com:1qaz2wsx@smtp.163.com';
 const MAIL_OPTIONS = {
-  from: 'lewulezo@163.com',
+  from: 'lewulezo_send@163.com',
   to: 'lewulezo@163.com, kevin_lin_monkey@163.com',
 }
 
@@ -39,8 +39,8 @@ class MailService {
 module.exports = MailService;
 
 
-// //test
-// !function test(){
-//   var mailService = MailService.getInstance();
-//   mailService.sendMail('测试', '得分50分').then(info => console.log(info)); 
-// }();
+//test
+!function test(){
+  var mailService = MailService.getInstance();
+  mailService.sendMail('测试', '得分50分').then(info => console.log(info)); 
+}();
