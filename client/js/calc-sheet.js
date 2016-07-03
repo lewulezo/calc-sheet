@@ -65,6 +65,7 @@
     $('#score').html('');
     $('#toggleResult').prop('disabled', true);
     submitted = false;
+    clearTimeout(timerOutID);
     hideResult();
   }
   
