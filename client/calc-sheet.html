@@ -57,12 +57,14 @@
     <input id="minNum" ype="number" style="width:60px" value="0">
     <input id="multipleFlag" checked="checked" type="checkbox">
     <label>包含乘法</label>
-    <label>限制时间</label>
-    <select id="timeLimit">
-      <option value="0">不限制时间</option>
-      <option value="2">每题2分钟</option>
-      <option value="5" selected>每题5分钟</option>
-    </select>
+    <label>限制时间:每题</label>
+    <input id="timeLimit" type="number" style="width:30px" value="2">
+    <label>分钟</label>
+    <!--<select id="timeLimit">-->
+    <!--  <option value="0">不限制时间</option>-->
+    <!--  <option value="2">每题2分钟</option>-->
+    <!--  <option value="5" selected>每题5分钟</option>-->
+    <!--</select>-->
     <button onclick="start()">开始出题</button>
     <hr>
     <table>
@@ -84,7 +86,7 @@
         <td class="itemId"></td><td>
         </td><td class="expression"></td>
         <td class="equal"> = </td>
-        <td class="answer"><input type="text"></td>
+        <td class="answer"><input type="number"></td>
         <td class="correct"></td>
         <td class="result"></td>
       </tr>
