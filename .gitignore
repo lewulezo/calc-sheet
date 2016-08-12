@@ -1,4 +1,4 @@
 node_modules/
 bower_components/
-store/*
+store/sheet.json
 npm-debug.log
