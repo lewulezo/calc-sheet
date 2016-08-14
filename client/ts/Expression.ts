@@ -1,6 +1,7 @@
 import Operator from './Operator';
 
 export class Expression{
+  correct:boolean;
   constructor(public left:number|Expression, public right:number|Expression, public operator:Operator){
   }
 
@@ -24,7 +25,7 @@ export class Expression{
       return [left, self.operator.symbo, right].join(' ');
     }
 
-    calcResult():number{
+    private calcResult():number{
       let self = this;
       let leftNumber:number;
       let rightNumber:number;
@@ -45,6 +46,10 @@ export class Expression{
         case Operator.MULTIPLE: result = multiple(leftNumber, rightNumber); break;
       }
       return result;
+    }
+
+    public get result():number{
+      return this.calcResult();
     }
 }
 

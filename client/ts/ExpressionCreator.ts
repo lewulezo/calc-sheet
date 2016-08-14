@@ -64,7 +64,7 @@ export class ExpressionCreator{
       break;
     case Operator.MINUS:
       right = randomNumber(max, min, plusDigitalBit);
-      if ((<Expression>left).calcResult() < right) {
+      if ((<Expression>left).result < right) {
         let t = left;
         left = right;
         right = t;

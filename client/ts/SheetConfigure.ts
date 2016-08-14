@@ -8,10 +8,7 @@ export class SheetConfiure{
   plusDigitalBit = 2;
   multipleDigitalBit = 1;
   operators = [Operator.PLUS, Operator.MINUS, Operator.MULTIPLE];
-  startTime:Date;
-  passTimeInterval:Number;
-  timerOutID:Number;
-  timeLimit:Number;
+  timeLimit = 0;
 }
 
 export default SheetConfiure;

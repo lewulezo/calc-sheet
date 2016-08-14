@@ -78,7 +78,7 @@
   
   function startTimer(){
     timerOutID = setTimeout(function(){
-      validate();
+      postResult();
       alert('时间到！答题结束！');
     }, timeLimit * itemCount * 60000);
   }
@@ -175,7 +175,7 @@
     $('#toggleResult').html() == '显示答案' ? showResult() : hideResult();
   }
 
-  function validate(){
+  function postResult(){
     if (!expressions.length) {
       alert('请先出题！');
       return;
@@ -236,6 +236,6 @@
 
  
   exports.start = start;
-  exports.validate = validate;
+  exports.postResult = postResult;
   exports.toggleResult = toggleResult;
 }(window);

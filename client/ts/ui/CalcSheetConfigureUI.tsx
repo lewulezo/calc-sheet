@@ -13,12 +13,10 @@ export class CalcSheetConfigureUI extends Component<SheetConfigure, Sheet>{
   render(){
     var self = this;
     return (
-      <div id="calc-sheet-configure-form" class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Panel title</h3>
-        </div>
-        <div class="panel-body">
-
+      <div id="calc-sheet-configure-form" class="" role="form">
+        <div class="form-group">
+          <label for="item-count">题目数量:</label>
+          <input id="item-count" type="number" class="form-control"/>
         </div>
       </div>
     )
