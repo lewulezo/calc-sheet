@@ -141,17 +141,27 @@ export class Sheet extends Observable{
     this._tasks.endAllTasks();
   }
 
-  postResult():void{
-    function postResult(sheetData){
-      $.post('/', JSON.stringify(sheetData), function(res){
-        console.log(res);
-      });
+  public toJSON():string{
+    let serializeObj = {
+      config: this._config,
+      expressions: this._expressions,
+      startTime: this.startTimeValue,
+      endTime: this.endTimeValue,
+      score: this.score
     }
+    return JSON.stringify(serializeObj);
+  }
+
+  postResult():void{
+    $.post('/', JSON.stringify(this), function(res){
+      console.log(res);
+    });
   }
 }
 
 function getPassTimeString(time){
   return Math.floor(time/60) + '分' + Math.floor(time % 60) + '秒';
 }
+
 
 export default Sheet;

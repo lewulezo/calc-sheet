@@ -9,6 +9,20 @@ export class SheetConfiure{
   multipleDigitalBit = 1;
   operators = [Operator.PLUS, Operator.MINUS, Operator.MULTIPLE];
   timeLimit = 0;
+
+  toJSON():string{
+    let serializeObj = {
+      degree: this.degree,
+      itemCount: this.itemCount,
+      max: this.max,
+      min: this.min,
+      plusDigitalBit: this.plusDigitalBit,
+      multipleDigitalBit: this.multipleDigitalBit,
+      operators: this.operators.map(oper=>oper.toString()),
+      timeLimit: this.timeLimit
+    };
+    return JSON.stringify(serializeObj);
+  }
 }
 
 export default SheetConfiure;

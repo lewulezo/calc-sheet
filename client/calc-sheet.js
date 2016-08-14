@@ -10428,11 +10428,9 @@
 	        this._tasks.endAllTasks();
 	    }
 	    postResult() {
-	        function postResult(sheetData) {
-	            $.post('/', JSON.stringify(sheetData), function (res) {
-	                console.log(res);
-	            });
-	        }
+	        $.post('/', JSON.stringify(this), function (res) {
+	            console.log(res);
+	        });
 	    }
 	}
 	exports.Sheet = Sheet;
