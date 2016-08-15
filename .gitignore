@@ -4,5 +4,5 @@ store/sheet.json
 npm-debug.log
 client/dist/
 typings/
-client/*.js
-client/*.js.map
+client/calc-sheet.js
+client/calc-sheet.js.map
