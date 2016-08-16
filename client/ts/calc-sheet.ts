@@ -7,7 +7,7 @@ import {EVENT_START, EVENT_SUBMITTED, EVENT_TIMEOUT, EVENT_TIMEPASS} from './She
 
 let sheet: Sheet;
 
-export function start(){	
+function start(){	
   if (sheet){
     if (!confirm('上次结果将被清空，确认吗？')){
       return;
@@ -98,11 +98,11 @@ function hideResult(){
   $('#toggleResult').html('显示答案');
 }
 
-export function toggleResult(){
+function toggleResult(){
   $('#toggleResult').html() == '显示答案' ? showResult() : hideResult();
 }
 
-export function postResult():void{
+function postResult():void{
   let expressions = sheet.expressions;
   if (!expressions.length) {
     alert('请先出题！');

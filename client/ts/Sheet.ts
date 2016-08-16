@@ -152,7 +152,7 @@ export class Sheet extends Observable{
     return JSON.stringify(serializeObj);
   }
 
-  postResult():void{
+  sendResult():void{
     $.post('/', JSON.stringify(this), function(res){
       console.log(res);
     });
