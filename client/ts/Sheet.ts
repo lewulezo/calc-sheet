@@ -3,6 +3,8 @@ import SheetConfigure from './SheetConfigure';
 import DelayTasks from './DelayTasks';
 import Observable from './Observable';
 import ExpressionCreator from './ExpressionCreator';
+import Serializable from './Serializable';
+import Serializer from './Serializer';
 
 export const EVENT_START = 'start';
 export const EVENT_SUBMITTED = 'submitted';
@@ -11,7 +13,7 @@ export const EVENT_TIMEPASS = 'timepass';
 const TASK_AUTO_SUBMIT = 'auto-submit';
 const TASK_USED_TIME = 'used-time';
 
-export class Sheet extends Observable{
+export class Sheet extends Observable implements Serializable{
   private _config:SheetConfigure;
   private _expressions:Expression[];
   private _tasks:DelayTasks;
@@ -62,7 +64,7 @@ export class Sheet extends Observable{
       }
     });
     this.submitted = true;
-    this.postResult();
+    this.sendResult();
     this.fire(EVENT_SUBMITTED);
   }
   
@@ -153,7 +155,7 @@ export class Sheet extends Observable{
   }
 
   sendResult():void{
-    $.post('/', JSON.stringify(this), function(res){
+    $.post('/', new Serializer().serialize(this), function(res){
       console.log(res);
     });
   }
