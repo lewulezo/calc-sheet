@@ -3,6 +3,5 @@ bower_components/
 store/sheet.json
 npm-debug.log
 client/dist/
-typings/
 client/calc-sheet.js
 client/calc-sheet.js.map
