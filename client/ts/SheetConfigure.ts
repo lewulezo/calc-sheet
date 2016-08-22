@@ -3,8 +3,8 @@ import Serializer from './Serializer';
 
 export class SheetConfiure{
   degree = 2;
-  itemCount = 100;
-  max = 1000;
+  itemCount = 10;
+  max = 100;
   min = 20;
   plusDigitalBit = 2;
   multipleDigitalBit = 1;

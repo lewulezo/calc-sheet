@@ -10269,8 +10269,8 @@
 	class SheetConfiure {
 	    constructor() {
 	        this.degree = 2;
-	        this.itemCount = 100;
-	        this.max = 1000;
+	        this.itemCount = 10;
+	        this.max = 100;
 	        this.min = 20;
 	        this.plusDigitalBit = 2;
 	        this.multipleDigitalBit = 1;
@@ -10449,7 +10449,11 @@
 	        return JSON.stringify(serializeObj);
 	    }
 	    sendResult() {
+<<<<<<< b892e4c9a84ca4e6dad127917e7711383b6fb0a3
 	        $.post('/', new Serializer_1.default().serialize(this), function (res) {
+=======
+	        $.post('/', JSON.stringify(this), function (res) {
+>>>>>>> ...
 	            console.log(res);
 	        });
 	    }
