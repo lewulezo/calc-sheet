@@ -6,3 +6,5 @@ client/dist/
 client/calc-sheet.js
 client/calc-sheet.js.map
 client/ts/*.js
+.idea/
+*.iml
