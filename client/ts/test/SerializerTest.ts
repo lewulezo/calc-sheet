@@ -1,10 +1,9 @@
 import Serializer from '../Serializer';
 
 function test(){
-  class A extends Serializable{
+  class A {
     b:B;
     constructor(public a1:number, public a2: string, public a3:Object, public a4:number[], public a5:boolean, public a6:B[], public a7:any[]){
-      super();
     }
     // serialize():string{
     //   return JSON.stringify({a1: this.a1});
@@ -15,10 +14,9 @@ function test(){
   }
   Serializer.register('A', A, ['a2']);
 
-  class B extends Serializable{
+  class B {
     b2:B;
     constructor(public b1:A){
-      super();
     }
     test(){
       console.log('test passed...');
