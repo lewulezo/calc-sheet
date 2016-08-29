@@ -1,4 +1,5 @@
 import Operator from './Operator';
+import Serializer from './Serializer';
 
 export class SheetConfiure{
   degree = 2;
@@ -24,5 +25,5 @@ export class SheetConfiure{
     return JSON.stringify(serializeObj);
   }
 }
-
+Serializer.register('SheetConfiure', SheetConfiure);
 export default SheetConfiure;

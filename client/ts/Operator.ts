@@ -1,3 +1,5 @@
+import Serializer from './Serializer';
+
 export class Operator{
   private _symbo:string;
   constructor(symbo:string){
@@ -18,4 +20,5 @@ export class Operator{
   static ALL = [Operator.PLUS, Operator.MINUS, Operator.MULTIPLE];
 }
 
+Serializer.register('Operator', Operator);
 export default Operator;

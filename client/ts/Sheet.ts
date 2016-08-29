@@ -1,9 +1,9 @@
+import * as $ from 'jquery';
 import Expression from './Expression';
 import SheetConfigure from './SheetConfigure';
 import DelayTasks from './DelayTasks';
 import Observable from './Observable';
 import ExpressionCreator from './ExpressionCreator';
-import Serializable from './Serializable';
 import Serializer from './Serializer';
 
 export const EVENT_START = 'start';
@@ -13,7 +13,7 @@ export const EVENT_TIMEPASS = 'timepass';
 const TASK_AUTO_SUBMIT = 'auto-submit';
 const TASK_USED_TIME = 'used-time';
 
-export class Sheet extends Observable implements Serializable{
+export class Sheet extends Observable{
   private _config:SheetConfigure;
   private _expressions:Expression[];
   private _tasks:DelayTasks;
@@ -63,9 +63,9 @@ export class Sheet extends Observable implements Serializable{
         sheet._correctCount++;
       }
     });
-    this.submitted = true;
-    this.sendResult();
-    this.fire(EVENT_SUBMITTED);
+    sheet._submitted = true;
+    sheet.sendResult();
+    sheet.fire(EVENT_SUBMITTED);
   }
   
 
@@ -160,6 +160,8 @@ export class Sheet extends Observable implements Serializable{
     });
   }
 }
+
+Serializer.register('Sheet', Sheet, ['_tasks', 'listeners']);
 
 function getPassTimeString(time){
   return Math.floor(time/60) + '分' + Math.floor(time % 60) + '秒';

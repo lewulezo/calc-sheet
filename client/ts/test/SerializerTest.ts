@@ -1,5 +1,4 @@
 import Serializer from '../Serializer';
-import Serializable from '../Serializable';
 
 function test(){
   class A extends Serializable{
@@ -25,7 +24,7 @@ function test(){
       console.log('test passed...');
     }
   }
-  // Serializer.registerSerializableClass('B', B);
+  Serializer.register('B', B);
 
 
   let a = new A(3, 'aa', {t:5, u:{cc:1}}, [1,4], false, [], []);
