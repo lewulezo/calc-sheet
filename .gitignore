@@ -8,3 +8,4 @@ client/*.js.map
 client/ts/*.js
 .idea/
 *.iml
+/.project
