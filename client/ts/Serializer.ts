@@ -1,4 +1,3 @@
-import Serializable from './Serializable';
 const md5 = require('md5');
 const classRegistry = {};
 
@@ -6,7 +5,7 @@ class ClassRegistration{
   constructor(public name:string, public clazz:Function, public ignoredFields:string[] = []){
   }
 }
-const defaultClassRegistration = new ClassRegistration('Serializable', Serializable);
+const defaultClassRegistration = new ClassRegistration('Object', Object);
 classRegistry[defaultClassRegistration.name] = defaultClassRegistration;
 classRegistry['Object'] = new ClassRegistration('Object', Object);
 classRegistry['Array'] = new ClassRegistration('Array', Array);
@@ -19,7 +18,7 @@ interface SerialObj{
 class SerializeContext{
   private _items:SerialContextItem[] = [];
 
-  putOrigObj(id:string, origObj:Serializable){
+  putOrigObj(id:string, origObj:Object){
     let item = this.getById(id);
     if (item){
       item.origObj = origObj;
@@ -38,7 +37,7 @@ class SerializeContext{
   }
 
 
-  forEach(callback:(string, Serializable, SerialObj)=>void):void{
+  forEach(callback:(string, Object, SerialObj)=>void):void{
     this._items.forEach(item=>callback(item.id, item.origObj, item.convObj));
   }
 
@@ -53,7 +52,7 @@ class SerializeContext{
     return result;
   }
 
-  getByOrigObj(obj:Serializable):SerialContextItem{
+  getByOrigObj(obj:Object):SerialContextItem{
     let result:SerialContextItem = null;
     this._items.some((item)=>{
       if (item.origObj === obj){
@@ -67,7 +66,7 @@ class SerializeContext{
 
 interface SerialContextItem{
   id:string;
-  origObj?:Serializable;
+  origObj?:Object;
   convObj?:SerialObj;
 }
 
@@ -81,7 +80,7 @@ export class Serializer{
   }
 
   private static getClassRegistration(clazz:Function):ClassRegistration{
-    let retVal:ClassRegistration;
+    let retVal:ClassRegistration = null;
     Object.keys(classRegistry).some(name=>{
       let reg = classRegistry[name];
       if (reg.clazz === clazz){
@@ -89,10 +88,10 @@ export class Serializer{
         return true;
       }
     });
-    if (!retVal) {
-      let name = Serializer.generateClassRegName(clazz);
-      retVal = Serializer.register(name, clazz);
-    }
+    // if (!retVal) {
+    //   let name = Serializer.generateClassRegName(clazz);
+    //   retVal = Serializer.register(name, clazz);
+    // }
     return retVal;
   }
 
@@ -101,7 +100,7 @@ export class Serializer{
   }
 
 //serial -----------------------------------------------------------------
-  public serialize(object:Serializable):string{
+  public serialize(object:Object):string{
     let context = new SerializeContext();
     let mainId = this.serializeSingleObject(object, context);
     let outputObj = {main:mainId};
@@ -111,7 +110,10 @@ export class Serializer{
     return JSON.stringify(outputObj);
   }
 
-  private serializeSingleObject(object:Serializable, context:SerializeContext):string{
+  private serializeSingleObject(object:Object, context:SerializeContext):string{
+    if (!Serializer.isSerializable(object)){
+      return '';
+    }
     let objId = this.genId(context);
     context.putOrigObj(objId, object);
     let dataObj;
@@ -127,7 +129,8 @@ export class Serializer{
         dataObj[field] = this.convertValueForSerialize(object[field], context);
       })
     }
-    let tgtObj:SerialObj = {"class":Serializer.getClassRegistration(object.constructor).name, "data":dataObj};
+    let reg = Serializer.getClassRegistration(object.constructor);
+    let tgtObj:SerialObj = {"class":reg.name, "data":dataObj};
     context.putConvObj(objId, tgtObj);
     return objId;
   }
@@ -141,19 +144,19 @@ export class Serializer{
   }
 
   private convertValueForSerialize(value:any, context:SerializeContext):any{
-    if (value instanceof Serializable || value instanceof Array || value.constructor === Object){
+    if (typeof value == 'object'){
       let contextItem = context.getByOrigObj(value);
       if (contextItem){
         return {refId: contextItem.id};
       } else {
-        return {refId: this.serializeSingleObject(<Serializable>value, context)};
+        return {refId: this.serializeSingleObject(value, context)};
       }
     } else {
       return value;
     }
   }
 
-  private isFieldSerializable(object:Serializable, field:string):boolean{
+  private isFieldSerializable(object:Object, field:string):boolean{
     let value = object[field];
     let reg = Serializer.getClassRegistration(object.constructor);
     if (value === null || value === undefined){
@@ -172,15 +175,19 @@ export class Serializer{
       if (value.constructor === Object){
         return true;
       }
-      if (!(value instanceof Serializable)){
+      if (!Serializer.isSerializable(value)){
         return false;
       }
     } 
     return true;
   }
+  
+  private static isSerializable(object:Object):boolean{
+    return Serializer.getClassRegistration(object.constructor) != null;
+  }
 
 //deserialize ----------------------------------------------------------
-  public deserialize(str:string):Serializable{
+  public deserialize(str:string):Object{
     let context = new SerializeContext(); 
     let inputObj = JSON.parse(str);
     let refArray = [];
@@ -206,7 +213,7 @@ export class Serializer{
     } else if (serialObj.class == 'Array'){
       obj = [];
     } else {
-      obj = Serializer.createObject<Serializable>(reg.clazz);
+      obj = Serializer.createObject<Object>(reg.clazz);
     }
     if (obj['deserialize'] instanceof Function){
       obj.deserialize(JSON.stringify(serialObj.data));
