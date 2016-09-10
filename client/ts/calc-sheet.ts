@@ -109,14 +109,14 @@ function postResult():void{
     return;
   }
   let answers:number[] = [];
-  $('#items tr').each((i, elem) => answers.push($('.answer input', elem).val()));
+  $('#items').find('tr').each((i, elem) => answers.push($('.answer input', elem).val()));
   sheet.submit(answers);
 }
 
 function showValidationResult(){
   let config = sheet.config;
   let expressions = sheet.expressions;
-  $('#items tr').each((i, elem) => {
+  $('#items').find('tr').each((i, elem) => {
     let correctTd = $('.correct', elem);
     let expression = expressions[i];
     if (expression.correct){
@@ -127,7 +127,7 @@ function showValidationResult(){
   });
   $('#toggleResult').prop('disabled', false);
   $('#score').html('你得了' + sheet.score + '分');
-  let timeCost = sheet.passedTimeString//Math.floor((Date.now() - sheet.startTimeValue) / 1000);
+  let timeCost = sheet.passedTimeString;//Math.floor((Date.now() - sheet.startTimeValue) / 1000);
   $('#time').html('总共用时' + timeCost);  
 }
 

@@ -106,7 +106,7 @@ export class Serializer{
     let outputObj = {main:mainId};
     context.forEach((id, srcObj, tgtObj)=>{
       outputObj[id] = tgtObj;
-    })
+    });
     return JSON.stringify(outputObj);
   }
 
@@ -114,7 +114,7 @@ export class Serializer{
     if (!Serializer.isSerializable(object)){
       return '';
     }
-    let objId = this.genId(context);
+    let objId = Serializer.genId(context);
     context.putOrigObj(objId, object);
     let dataObj;
     if (object['serialize'] instanceof Function){
@@ -123,7 +123,7 @@ export class Serializer{
     } else {
       dataObj = {};
       Object.keys(object).forEach(field=>{
-        if (!this.isFieldSerializable(object, field)){
+        if (!Serializer.isFieldSerializable(object, field)){
           return;
         }
         dataObj[field] = this.convertValueForSerialize(object[field], context);
@@ -135,7 +135,7 @@ export class Serializer{
     return objId;
   }
 
-  private genId(context) {
+  private static genId(context) {
     let id:string;
     while(!id || context.getById(id) != null){
       id = Serializer.uuid();
@@ -156,7 +156,7 @@ export class Serializer{
     }
   }
 
-  private isFieldSerializable(object:Object, field:string):boolean{
+  private static isFieldSerializable(object:Object, field:string):boolean{
     let value = object[field];
     let reg = Serializer.getClassRegistration(object.constructor);
     if (value === null || value === undefined){
@@ -235,7 +235,7 @@ export class Serializer{
     Object.defineProperty(obj, 'constructor', {
       value: clazz,
       enumerable: false
-    })
+    });
     return obj;
   }
 
@@ -245,8 +245,7 @@ export class Serializer{
     for (var i = 0; i < 5; i++) {
         s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
     }
-    var uuid = s.join("");
-    return uuid;
+    return s.join("");
   }
 }
 

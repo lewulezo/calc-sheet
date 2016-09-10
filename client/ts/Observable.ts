@@ -49,7 +49,7 @@ export class Observable{
             return true;
           }
         } catch (error){
-          console.log(`Error in dispatchEvent ${eventName}...${error.message}`)
+          console.log(`Error in dispatchEvent ${eventName}...${error.message}`);
           if (evt.stopWhenError){
             return true;
           }
