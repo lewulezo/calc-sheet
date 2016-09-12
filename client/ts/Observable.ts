@@ -1,44 +1,46 @@
+type EventHandler = (event:ObjectEvent, ...args:any[])=>any;
 
 export class Observable{
-  private listeners;
+  private listeners:{[eventName:string]:EventHandler[]};
   public fire:(eventName:string, ...args:any[])=>void;
-  public on:(eventName:string, handler:(event:ObjectEvent, ...args:any[])=>any)=>Observable;
-  public un:(eventName:string, func:(event:ObjectEvent,...args:any[])=>any)=>Observable;
+  public on:(eventName:string, handler:EventHandler)=>Observable;
+  public un:(eventName:string, handler:EventHandler)=>Observable;
 
   constructor(){
-    let self = this;
+    const self = this;
     self.listeners = {};
     self.fire = self.dispatchEvent.bind(self);
     self.un = self.removeEventListener.bind(self);
     self.on = self.addEventListener.bind(self);
   }
 
-  private addEventListener(eventName:string, handler:(eventName:string, ...args:any[])=>any): Observable{
-    let handlers:Function[] = this.listeners[eventName];
+  private addEventListener(eventName:string, handler:EventHandler): Observable{
+    const self = this;
+    let handlers = self.listeners[eventName];
     if (handlers){
       handlers.push(handler);
     } else {
       handlers = [handler];
-      this.listeners[eventName] = handlers;
+      self.listeners[eventName] = handlers;
     }
     return this;
   }
 
-  private removeEventListener(eventName, handler:(eventName:string, ...args:any[])=>any): Observable{
-    let handlers:Function[] = this.listeners[eventName];
+  private removeEventListener(eventName, handler:EventHandler): Observable{
+    const self = this;
+    const handlers = self.listeners[eventName];
     if (handlers){
       let index = handlers.indexOf(handler);
       if (index > -1){
         handlers.splice(index, 1);
       }
     }
-    return this;
+    return self;
   }
 
   private dispatchEvent(eventName:string, ...args:any[]):void{
-    let self = this;
-    let handlers: ((event:ObjectEvent, ...args:any[])=>any)[];
-    handlers = self.listeners[eventName];
+    const self = this;
+    const handlers = self.listeners[eventName];
     let evt = new ObjectEvent(eventName);
     if (handlers){
       handlers.some(func=>{
@@ -49,7 +51,7 @@ export class Observable{
             return true;
           }
         } catch (error){
-          console.log(`Error in dispatchEvent ${eventName}...${error.message}`)
+          console.log(`Error in dispatchEvent ${eventName}...${error.message}`);
           if (evt.stopWhenError){
             return true;
           }

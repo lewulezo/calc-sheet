@@ -1,7 +1,7 @@
 import Operator from './Operator';
 import Serializer from './Serializer';
 
-export class SheetConfiure{
+export class SheetConfigure{
   degree = 2;
   itemCount = 10;
   max = 100;
@@ -25,5 +25,5 @@ export class SheetConfiure{
     return JSON.stringify(serializeObj);
   }
 }
-Serializer.register('SheetConfiure', SheetConfiure);
-export default SheetConfiure;
+Serializer.register('SheetConfigure', SheetConfigure);
+export default SheetConfigure;

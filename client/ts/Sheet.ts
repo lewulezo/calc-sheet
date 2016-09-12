@@ -150,7 +150,7 @@ export class Sheet extends Observable{
       startTime: this.startTimeValue,
       endTime: this.endTimeValue,
       score: this.score
-    }
+    };
     return JSON.stringify(serializeObj);
   }
 

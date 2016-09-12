@@ -1,9 +1,11 @@
 import Operator from './Operator';
 import Serializer from './Serializer';
 
+type ExpressionPart = number|Expression;
+
 export class Expression{
   correct:boolean;
-  constructor(public left:number|Expression, public right:number|Expression, public operator:Operator){
+  constructor(public left:ExpressionPart, public right:ExpressionPart, public operator:Operator){
   }
 
   public toString():string{
