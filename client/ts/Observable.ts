@@ -73,3 +73,4 @@ class ObjectEvent{
     this.stopWhenError = true;
   }
 }
+export default Observable;
