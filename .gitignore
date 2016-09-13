@@ -9,3 +9,4 @@ client/ts/*.js
 .idea/
 *.iml
 /.project
+typings/

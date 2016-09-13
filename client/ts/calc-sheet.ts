@@ -114,7 +114,6 @@ function postResult():void{
 }
 
 function showValidationResult(){
-  let config = sheet.config;
   let expressions = sheet.expressions;
   $('#items').find('tr').each((i, elem) => {
     let correctTd = $('.correct', elem);
