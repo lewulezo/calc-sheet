@@ -30,14 +30,14 @@ export class ConfigureUI extends Component<ConfigureUIProps, SheetConfigure>{
           <label htmlFor="item-count" className="control-label col-sm-2">题目数量:</label>
           <div className="col-sm-2">
             <input id="item-count" type="number" className="form-control" max="100" min="1" 
-            value={state.itemCount}
+            value={String(state.itemCount)}
             onChange={this.onChange.bind(this, 'itemCount')} />
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="degree" className="control-label col-sm-2">复杂度:</label>
           <div className="col-sm-2">
-            <select id="degree" value={state.degree}
+            <select id="degree" value={String(state.degree)}
               onChange={this.onChange.bind(this, 'degree')} className="form-control" >
               <option value="0">两个数</option>
               <option value="1">三个数</option>
@@ -49,7 +49,7 @@ export class ConfigureUI extends Component<ConfigureUIProps, SheetConfigure>{
           <label htmlFor="max" className="control-label col-sm-2">最大数:</label>
           <div className="col-sm-2">
             <input id="max" type="number" className="form-control" max="10000" min="1" 
-            value={state.max}
+            value={String(state.max)}
             onChange={this.onChange.bind(this, 'max')} />
           </div>
         </div>
@@ -57,7 +57,7 @@ export class ConfigureUI extends Component<ConfigureUIProps, SheetConfigure>{
           <label htmlFor="min" className="control-label col-sm-2">最小数:</label>
           <div className="col-sm-2">
             <input id="min" type="number" className="form-control" max="10000" min="1" 
-            value={state.min}
+            value={String(state.min)}
             onChange={this.onChange.bind(this, 'min')} />
           </div>
         </div>

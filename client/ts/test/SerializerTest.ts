@@ -1,6 +1,8 @@
-import Serializer from '../Serializer';
+import { Serializer, Serializable } from '../utils';
 
 function test(){
+
+  @Serializable('A', ['a2'])
   class A {
     b:B;
     constructor(public a1:number, public a2: string, public a3:Object, public a4:number[], public a5:boolean, public a6:B[], public a7:any[]){
@@ -12,8 +14,9 @@ function test(){
     //   this.a1 = JSON.parse(str).a1;
     // }
   }
-  Serializer.register('A', A, ['a2']);
+  // Serializer.register('A', A, ['a2']);
 
+  @Serializable('B')
   class B {
     b2:B;
     constructor(public b1:A){
@@ -22,7 +25,7 @@ function test(){
       console.log('test passed...');
     }
   }
-  Serializer.register('B', B);
+  // Serializer.register('B', B);
 
 
   let a = new A(3, 'aa', {t:5, u:{cc:1}}, [1,4], false, [], []);

@@ -1,8 +1,9 @@
 import Operator from './Operator';
-import Serializer from './Serializer';
+import { Serializer, Serializable } from './utils';
 
 type ExpressionPart = number|Expression;
 
+@Serializable('Expression')
 export class Expression{
   correct:boolean;
   constructor(public left:ExpressionPart, public right:ExpressionPart, public operator:Operator){
@@ -84,5 +85,5 @@ function rate(num:number):number{
   return digitalPos == -1 ? 1 : Math.pow(10, oStr.length - digitalPos - 1);
 }
 
-Serializer.register('Expression', Expression);
+// Serializer.register('Expression', Expression);
 export default Expression;

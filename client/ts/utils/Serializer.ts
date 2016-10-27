@@ -1,4 +1,3 @@
-const md5 = require('md5');
 const classRegistry = {};
 
 class ClassRegistration{
@@ -70,6 +69,11 @@ interface SerialContextItem{
   convObj?:SerialObj;
 }
 
+export function Serializable(name: string, ignoreFields?: string[]) {
+  return (constructor:Function) => {
+     Serializer.register(name, constructor, ignoreFields);
+  }
+}
 
 export class Serializer{
 //class registration-------------------------------------------------------
@@ -93,10 +97,6 @@ export class Serializer{
     //   retVal = Serializer.register(name, clazz);
     // }
     return retVal;
-  }
-
-  private static generateClassRegName(clazz: Function):string{
-    return clazz.name + ':' + md5(clazz.toString());
   }
 
 //serial -----------------------------------------------------------------

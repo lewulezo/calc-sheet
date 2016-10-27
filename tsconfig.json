@@ -5,7 +5,8 @@
         "sourceMap": true,
         "jsx": "react",
         "outDir": "client/dist",
-        "rootDir": "client/ts"
+        "rootDir": "client/ts",
+        "experimentalDecorators": true
     },
     "exclude": [
         "node_modules",

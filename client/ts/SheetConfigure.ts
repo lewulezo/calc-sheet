@@ -1,6 +1,7 @@
 import Operator from './Operator';
-import Serializer from './Serializer';
+import { Serializer, Serializable } from './utils';
 
+@Serializable('SheetConfigure')
 export class SheetConfigure{
   degree = 2;
   itemCount = 10;
@@ -25,5 +26,5 @@ export class SheetConfigure{
     return JSON.stringify(serializeObj);
   }
 }
-Serializer.register('SheetConfigure', SheetConfigure);
+// Serializer.register('SheetConfigure', SheetConfigure);
 export default SheetConfigure;
