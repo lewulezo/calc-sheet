@@ -26,5 +26,4 @@ export class SheetConfigure{
     return JSON.stringify(serializeObj);
   }
 }
-// Serializer.register('SheetConfigure', SheetConfigure);
 export default SheetConfigure;

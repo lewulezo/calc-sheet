@@ -155,13 +155,12 @@ export class Sheet extends Observable{
   }
 
   sendResult():void{
-    $.post('/', new Serializer().serialize(this), function(res){
+    $.post('/', Serializer.serialize(this), function(res){
       console.log(res);
     });
   }
 }
 
-// Serializer.register('Sheet', Sheet, ['_tasks', 'listeners']);
 
 function getPassTimeString(time){
   return Math.floor(time/60) + '分' + Math.floor(time % 60) + '秒';

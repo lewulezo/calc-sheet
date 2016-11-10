@@ -1,11 +1,15 @@
-import { Serializer, Serializable } from '../utils';
+import { Serializer, Serializable, transiant } from '../utils';
 
 function test(){
-
-  @Serializable('A', ['a2'])
+  @Serializable()
   class A {
     b:B;
-    constructor(public a1:number, public a2: string, public a3:Object, public a4:number[], public a5:boolean, public a6:B[], public a7:any[]){
+    @transiant
+    a2:string;
+    a6:B[];
+    constructor(public a1:number, a2: string, public a3:Object, public a4:number[], public a5:boolean, a6:B[], public a7:any[]){
+      this.a2 = a2;
+      this.a6 = a6;
     }
     // serialize():string{
     //   return JSON.stringify({a1: this.a1});
@@ -36,19 +40,18 @@ function test(){
   a.a6 = [b,b];
   a.a7 = [1,'a',a];
   a.a3['u']['dd'] = a.a6;
-  let ser = new Serializer();
-  let strA = ser.serialize(a);
-  let strB = ser.serialize(b);
-  console.log('---------a----------' + strA);
-  console.log('---------b----------' + strB);
-  let a1:A = <A>ser.deserialize(strA);
-  let b1:B = <B>ser.deserialize(strB);
+  let strA = Serializer.serialize(a);
+  let strB = Serializer.serialize(b);
+  console.log('---------a----------\n' + strA);
+  console.log('---------b----------\n' + strB);
+  let a1:A = Serializer.deserialize<A>(strA);
+  let b1:B = Serializer.deserialize<B>(strB);
   console.log(a1 instanceof A);
   console.log(b1 instanceof B);
   // a1.a6[1].test();
   console.log(a1);
   console.log(b1);
-  // console.log(a1.a3['u']['dd'] == a1.a6)
+  console.log(a1.a3['u']['dd'] == a1.a6)
   
 }
 test();
