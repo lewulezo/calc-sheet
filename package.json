@@ -13,8 +13,11 @@
     "express": "~4.12.4",
     "jade": "~1.9.2",
     "less-middleware": "1.0.x",
+    "lewulezo-utils": "~0.1.0",
     "morgan": "~1.5.3",
     "nodemailer": "^2.4.2",
+    "react": "~15.3.2",
+    "react-dom": "~15.3.2",
     "serve-favicon": "~2.2.1"
   },
   "devDependencies": {

@@ -18,7 +18,7 @@ module.exports = [{
     filename: './client/calc-sheet.js'
   },
   resolve: {
-    extensions: ['', '.d.ts',' .webpack.js', '.web.js', '.ts', '.js', '.tsx']
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.tsx']
   },
   devtool: 'source-map',
   module: {

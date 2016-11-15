@@ -1,5 +1,5 @@
 import Operator from './Operator';
-import { Serializer, Serializable } from './utils';
+import { Serializer, Serializable } from 'lewulezo-utils';
 
 type ExpressionPart = number|Expression;
 

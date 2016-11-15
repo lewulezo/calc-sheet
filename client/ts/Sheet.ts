@@ -1,7 +1,7 @@
 import * as $ from 'jquery';
 import Expression from './Expression';
 import SheetConfigure from './SheetConfigure';
-import { DelayTasks, Observable, Serializer, Serializable } from './utils';
+import { DelayTasks, Observable, Serializer, Serializable } from 'lewulezo-utils';
 import ExpressionCreator from './ExpressionCreator';
 
 export const EVENT_START = 'start';

@@ -1,4 +1,4 @@
-import { Serializer, Serializable } from './utils';
+import { Serializer, Serializable } from 'lewulezo-utils';
 
 @Serializable('Operator')
 export class Operator{

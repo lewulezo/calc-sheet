@@ -1,4 +1,4 @@
-import { Serializer, Serializable, transiant } from '../utils';
+import { Serializer, Serializable, transiant } from 'lewulezo-utils';
 
 function test(){
   @Serializable()
